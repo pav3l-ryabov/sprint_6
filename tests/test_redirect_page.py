@@ -1,0 +1,26 @@
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from data.test_data import URL_MAIN_PAGE
+import allure
+from locators.main_page_locators import MainPageLocators
+from pages.main_page import MainPage
+
+
+@allure.title('Тесты перехода между страницами')
+class TestRedirectPage:
+
+    def test_redirect_to_home(self, driver):
+        driver.get(URL_MAIN_PAGE)
+        main_page = MainPage(driver)
+        main_page.click_to_element(MainPageLocators.ORDER_BUTTON_TOP)
+        main_page.click_to_element(MainPageLocators.HOME_BUTTON)
+        assert 'Привезём его прямо к вашей двери' in main_page.get_text_from_element(MainPageLocators.HOME_TEXT)
+
+    def test_redirect_to_dzen(self, driver):
+        driver.get(URL_MAIN_PAGE)
+        main_page = MainPage(driver)
+        main_page.click_to_element(MainPageLocators.YANDEX_LOGO)
+        main_page.switch_to()
+        WebDriverWait(driver, 10).until(EC.url_to_be("https://dzen.ru/?yredirect=true"))
+        assert driver.current_url == "https://dzen.ru/?yredirect=true"
+
