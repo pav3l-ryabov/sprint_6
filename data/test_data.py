@@ -1,5 +1,3 @@
-from locators.order_page_locators import OrderPageLocators
-
 ANSWERS_DATA = [
     'Сутки — 400 рублей. Оплата курьеру — наличными или картой.',
     'Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто сделать несколько заказов — один за другим.',
@@ -13,28 +11,22 @@ ANSWERS_DATA = [
 
 URL_MAIN_PAGE = 'https://qa-scooter.praktikum-services.ru/'
 
-ORDER_DATA_1 = (
-    OrderPageLocators.NAME_INPUT, "Иван",
-    OrderPageLocators.LAST_NAME_INPUT, "Иванов",
-    OrderPageLocators.ADDRESS_INPUT, "Москва",
-    OrderPageLocators.SELECTOR_METRO, OrderPageLocators.METRO_STATION_1,
-    OrderPageLocators.PHONE_NUMBER_INPUT, "79999999999",
-    OrderPageLocators.ENTER_BUTTON,
-    OrderPageLocators.DATE_INPUT, "01.01.2026",
-    OrderPageLocators.DAYS_OF_RENT_SELECTOR, OrderPageLocators.ONE_DAYS_OF_RENT,
-    OrderPageLocators.ORDER_BUTTON,
-    OrderPageLocators.YES_BUTTON
-)
+ORDER_1 = {
+    "name": "Иван",
+    "last_name": "Иванов",
+    "address": "Москва",
+    "metro_station_index": 0,
+    "phone": "79999999999",
+    "date": "01.01.2026",
+    "rent_time": "сутки"
+}
 
-ORDER_DATA_2 = (
-    OrderPageLocators.NAME_INPUT, "Пётр",
-    OrderPageLocators.LAST_NAME_INPUT, "Петров",
-    OrderPageLocators.ADDRESS_INPUT, "Санкт-Петербург",
-    OrderPageLocators.SELECTOR_METRO, OrderPageLocators.METRO_STATION_2,
-    OrderPageLocators.PHONE_NUMBER_INPUT, "78888888888",
-    OrderPageLocators.ENTER_BUTTON,
-    OrderPageLocators.DATE_INPUT, "02.02.2026",
-    OrderPageLocators.DAYS_OF_RENT_SELECTOR, OrderPageLocators.TWO_DAYS_OF_RENT,
-    OrderPageLocators.ORDER_BUTTON,
-    OrderPageLocators.YES_BUTTON
-)
+ORDER_2 = {
+    "name": "Пётр",
+    "last_name": "Петров",
+    "address": "Санкт-Петербург",
+    "metro_station_index": 1,
+    "phone": "78888888888",
+    "date": "02.02.2026",
+    "rent_time": "двое суток"
+}

@@ -6,9 +6,9 @@ from locators.main_page_locators import MainPageLocators
 from pages.main_page import MainPage
 
 
-@allure.title('Тесты перехода между страницами')
 class TestRedirectPage:
 
+    @allure.title('Тест перехода на домашнюю страницу')
     def test_redirect_to_home(self, driver):
         driver.get(URL_MAIN_PAGE)
         main_page = MainPage(driver)
@@ -16,11 +16,12 @@ class TestRedirectPage:
         main_page.click_to_element(MainPageLocators.HOME_BUTTON)
         assert 'Привезём его прямо к вашей двери' in main_page.get_text_from_element(MainPageLocators.HOME_TEXT)
 
+    @allure.title('Тест перехода на главную страницу Яндекс')
     def test_redirect_to_dzen(self, driver):
         driver.get(URL_MAIN_PAGE)
         main_page = MainPage(driver)
         main_page.click_to_element(MainPageLocators.YANDEX_LOGO)
         main_page.switch_to()
-        WebDriverWait(driver, 10).until(EC.url_to_be("https://dzen.ru/?yredirect=true"))
-        assert driver.current_url == "https://dzen.ru/?yredirect=true"
+        main_page.wait_for_url_to_be("https://dzen.ru/?yredirect=true")
+        assert main_page.get_current_url() == "https://dzen.ru/?yredirect=true"
 

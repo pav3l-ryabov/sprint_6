@@ -1,29 +1,31 @@
-import time
 import allure
 import pytest
-from data.test_data import ORDER_DATA_1, ORDER_DATA_2
-from locators.main_page_locators import MainPageLocators
+from locators.order_page_locators import OrderPageLocators
 from pages.base_page import BasePage
 
 class OrderPage(BasePage):
 
     @allure.step('Создание заказа')
-    def set_order(self, name_locator, name_data, last_name_locator, last_name_data, address_locator,
-                  address_data, selector_metro_locator, metro_station, phone_number_locator, phone_data, enter_locator,
-                  date_locator, date_data, days_of_rent_selector, days_of_rent_locator, order_button, yes_button):
-        self.add_text_to_element(name_locator, name_data)
-        self.add_text_to_element(last_name_locator, last_name_data)
-        self.add_text_to_element(address_locator, address_data)
-        self.click_to_element(selector_metro_locator)
-        self.click_to_element(metro_station)
-        self.add_text_to_element(phone_number_locator, phone_data)
-        self.click_to_element(enter_locator)
-        self.add_text_to_element(date_locator, date_data)
-        self.click_to_element(order_button) # Команда для того, чтобы убрать датапикер
-        self.click_to_element(days_of_rent_selector)
-        self.click_to_element(days_of_rent_locator)
-        self.click_to_element(order_button)
-        self.click_to_element(yes_button)
+    def set_order(self, order_data: dict):
+        self.add_text_to_element(OrderPageLocators.NAME_INPUT, order_data["name"])
+        self.add_text_to_element(OrderPageLocators.LAST_NAME_INPUT, order_data["last_name"])
+        self.add_text_to_element(OrderPageLocators.ADDRESS_INPUT, order_data["address"])
+        self.click_to_element(OrderPageLocators.SELECTOR_METRO)
+        if order_data["metro_station_index"] == 0:
+            self.click_to_element(OrderPageLocators.METRO_STATION_1)
+        elif order_data["metro_station_index"] == 1:
+            self.click_to_element(OrderPageLocators.METRO_STATION_2)
+        self.add_text_to_element(OrderPageLocators.PHONE_NUMBER_INPUT, order_data["phone"])
+        self.click_to_element(OrderPageLocators.ENTER_BUTTON)
+        self.add_text_to_element(OrderPageLocators.DATE_INPUT, order_data["date"])
+        self.click_to_element(OrderPageLocators.ORDER_BUTTON) # Команда для того, чтобы убрать датапикер
+        self.click_to_element(OrderPageLocators.DAYS_OF_RENT_SELECTOR)
+        if order_data["rent_time"] == "сутки":
+            self.click_to_element(OrderPageLocators.ONE_DAYS_OF_RENT)
+        elif order_data["rent_time"] == "двое суток":
+            self.click_to_element(OrderPageLocators.TWO_DAYS_OF_RENT)
+        self.click_to_element(OrderPageLocators.ORDER_BUTTON)
+        self.click_to_element(OrderPageLocators.YES_BUTTON)
 
     @allure.step('Проверка, что заказ создался')
     def check_order(self, locator):

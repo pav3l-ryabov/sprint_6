@@ -4,9 +4,9 @@ import pytest
 from pages.main_page import MainPage
 
 
-@allure.title('Тесты вопросов о важном')
 class TestMainPage:
 
+    @allure.title('Тесты вопросов о важном')
     @pytest.mark.parametrize('num', range(len(ANSWERS_DATA)))
     def test_questions_and_answers(self, driver, num):
         driver.get(URL_MAIN_PAGE)

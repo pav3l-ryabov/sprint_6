@@ -2,6 +2,7 @@ from pages.base_page import BasePage
 import allure
 from locators.main_page_locators import MainPageLocators
 
+
 class MainPage(BasePage):
 
     @allure.step('Клик на вопрос')
@@ -19,3 +20,13 @@ class MainPage(BasePage):
     def check_question_and_answer(self, num):
         self.click_to_question(num)
         return self.get_answer_text(num)
+
+    @allure.step('Нажать верхнюю кнопку "Заказать"')
+    def click_top_order_button(self):
+        self.scroll_to_element(MainPageLocators.ORDER_BUTTON_TOP)
+        self.click_to_element(MainPageLocators.ORDER_BUTTON_TOP)
+
+    @allure.step('Нажать нижнюю кнопку "Заказать"')
+    def click_bottom_order_button(self):
+        self.scroll_to_element(MainPageLocators.ORDER_BUTTON_BOTTOM)
+        self.click_to_element(MainPageLocators.ORDER_BUTTON_BOTTOM)
