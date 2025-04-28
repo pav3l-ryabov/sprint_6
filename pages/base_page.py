@@ -37,7 +37,7 @@ class BasePage:
         self.driver.switch_to.window(self.driver.window_handles[-1])
 
     def wait_for_url_to_be(self, url, timeout=10):
-        WebDriverWait(self.driver, timeout).until(EC.url_to_be(url))
+        WebDriverWait(self.driver, timeout).until(expected_conditions.url_to_be(url))
 
     def get_current_url(self):
         return self.driver.current_url

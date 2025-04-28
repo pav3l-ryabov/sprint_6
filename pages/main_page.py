@@ -30,3 +30,15 @@ class MainPage(BasePage):
     def click_bottom_order_button(self):
         self.scroll_to_element(MainPageLocators.ORDER_BUTTON_BOTTOM)
         self.click_to_element(MainPageLocators.ORDER_BUTTON_BOTTOM)
+
+    @allure.step('Нажать на кнопку домой')
+    def click_home_button(self):
+        self.click_to_element(MainPageLocators.HOME_BUTTON)
+
+    @allure.step('Нажать логотип Яндекса')
+    def click_yandex_logo(self):
+        self.click_to_element(MainPageLocators.YANDEX_LOGO)
+
+    @allure.step('Получить текст с домашней страницы')
+    def get_home_heading(self):
+        return self.get_text_from_element(MainPageLocators.HOME_TEXT)

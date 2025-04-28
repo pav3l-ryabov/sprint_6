@@ -1,5 +1,4 @@
 import allure
-import pytest
 from locators.order_page_locators import OrderPageLocators
 from pages.base_page import BasePage
 
@@ -28,6 +27,6 @@ class OrderPage(BasePage):
         self.click_to_element(OrderPageLocators.YES_BUTTON)
 
     @allure.step('Проверка, что заказ создался')
-    def check_order(self, locator):
-        return self.get_text_from_element(locator)
+    def get_order_status(self):
+        return self.get_text_from_element(OrderPageLocators.CHECK_ORDER_STATUS)
 
